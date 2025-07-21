@@ -11,7 +11,7 @@ data = pd.read_csv("garments_worker_productivity.csv")
 print("Dataset loaded successfully!")
 print("Shape of dataset:", data.shape)
 print(data.head())
-# Step 3: Data Preprocessing
+# Data Preprocessing
 print("\nChecking for missing values...")
 print(data.isnull().sum())
 
@@ -34,13 +34,13 @@ for col in categorical_cols:
 print("\nData after preprocessing:")
 print(data.head())
 
-# Step 4: Split Data
+#  Split Data
 X = data.drop('actual_productivity', axis=1)
 y = data['actual_productivity']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Step 5: Train Models
+# Train Models
 
 print("\nTraining Linear Regression Model...")
 lr = LinearRegression()
@@ -57,7 +57,7 @@ xgb = XGBRegressor()
 xgb.fit(X_train, y_train)
 pred_xgb = xgb.predict(X_test)
 
-# Step 6: Evaluate Models
+#  Evaluate Models
 def evaluate_model(name, y_test, y_pred):
     print(f"\nModel: {name}")
     print("MAE:", mean_absolute_error(y_test, y_pred))
@@ -68,10 +68,10 @@ evaluate_model("Linear Regression", y_test, pred_lr)
 evaluate_model("Random Forest", y_test, pred_rf)
 evaluate_model("XGBoost", y_test, pred_xgb)
 
-# Step 8: Save the best model
+#  Save the best model
 import pickle
 
 with open("best_model.pkl", "wb") as f:
     pickle.dump(xgb, f)
 
-print("\n✅ XGBoost model saved as 'best_model.pkl'")
+print("\n XGBoost model saved as 'best_model.pkl'")
